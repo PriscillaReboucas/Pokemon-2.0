@@ -1,21 +1,14 @@
-import { useEffect, useState } from "react";
-import { allPokemons } from "./repo/pokeapi";
-import { PokemonModel } from "./interfaces/pokemons.d";
+import { Routes, Route } from "react-router-dom";
+import { Pokemons } from "./pages/Pokemons";
 
 function App() {
-  const [pokemonList, setPokemonList] = useState<Array<string>>([]);
-
-  useEffect(()=> {
-    allPokemons().then((data: PokemonModel)=> {
-      setPokemonList(data.results)
-    })
-  }, []);
-
   return (
-    <div className="App">
-      <h1>Test</h1>
-    </div>
-  )
+    <main>
+      <Routes>
+        <Route path="/pokemons" element={<Pokemons />} />
+      </Routes>
+    </main>
+  );
 }
 
-export default App
+export default App;
