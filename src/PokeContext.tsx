@@ -1,31 +1,24 @@
-import { createContext, useEffect, useState } from "react";
-import { getPokemons } from "./repository/pokeapi";
+import { createContext, useState } from "react";
 import {
   DevicesProviderProps,
   Pokemon,
-  PokemonContextType,
-  PokemonModel,
-} from "./types/pokemons.d";
+  PokemonContext,
+} from "./interfaces/pokemons";
 
-export const PokeContext = createContext<PokemonContextType | null>(null);
+export const PokeContext = createContext<PokemonContext | null>(null);
 
 export const PokeProvider = ({ children }: DevicesProviderProps) => {
-  const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
   const [error, setError] = useState("");
-
-  useEffect(() => {
-    getPokemons()
-      .then((data: PokemonModel) => {
-        setPokemonList(data.results);
-      })
-      .catch((err) => setError(err));
-  }, []);
+  const [loading, setLoading] = useState(true);
+  const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
 
   const contextValues = {
-    pokemonList,
-    setPokemonList,
     error,
     setError,
+    loading,
+    setLoading,
+    pokemonList,
+    setPokemonList,
   };
 
   return (

@@ -1,4 +1,4 @@
-import { Pokemon } from "../types/pokemons.d";
+import { Pokemon } from "../../interfaces/pokemons";
 import { Card } from "./Card";
 
 type CardListProps = {

@@ -1,9 +1,23 @@
-import { PokemonModel } from "../types/pokemons.d";
+import { PokemonModel } from "../interfaces/pokemons";
 
-export const getPokemons = async (): Promise<PokemonModel> => {
+const API_HOST = "https://pokeapi.co/api/v2";
+
+export const getPokemons = async (
+  limit = "151",
+  offset = "0"
+): Promise<PokemonModel> => {
   const response = await fetch(
-    "https://pokeapi.co/api/v2/pokemon?limit=151&offset=0"
+    `${API_HOST}/pokemon?limit=${limit}&offset=${offset}`
   );
-  const results = response.json();
-  return results;
+  return response.json();
 };
+
+export async function profile(name: string): Promise<PokemonModel> {
+  const response = await fetch(`${API_HOST}/pokemon/${name}`);
+  return response.json();
+}
+
+export async function ability(name: string): Promise<PokemonModel> {
+  const response = await fetch(`${API_HOST}/ability/${name}`);
+  return response.json();
+}

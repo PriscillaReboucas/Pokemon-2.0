@@ -12,11 +12,13 @@ export interface PokemonModel {
   results: Pokemon[];
 }
 
-export type PokemonContextType = {
-  pokemonList: Pokemon[];
-  setPokemonList: (list: Pokemon[]) => void;
+export interface PokemonContext {
   error: string;
   setError: (err: string) => void;
+  loading: boolean;
+  setLoading: (load: boolean) => void;
+  pokemonList: Pokemon[];
+  setPokemonList: (list: Pokemon[]) => void;
 };
 
 export interface DevicesProviderProps {
