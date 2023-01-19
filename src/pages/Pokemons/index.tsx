@@ -3,6 +3,7 @@ import { PokemonContext, PokemonModel } from "../../interfaces/pokemons";
 import { PokeContext } from "../../PokeContext";
 import { CardList } from "../../components/Card/CardList";
 import { getPokemons } from "../../repository/pokeapi";
+import { Search } from "../../components/Search";
 
 export const Pokemons = () => {
   const { pokemonList, setLoading, setPokemonList, setError } = useContext(
@@ -20,6 +21,7 @@ export const Pokemons = () => {
 
   return (
     <>
+      <Search />
       <CardList pokemons={pokemonList} />
     </>
   );

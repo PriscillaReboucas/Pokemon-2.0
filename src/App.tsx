@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { Header } from "./components/Header";
 import { Pokemons } from "./pages/Pokemons";
 import { Profile } from "./pages/Profile";
+import './styles.css'
 
 function App() {
   return (
