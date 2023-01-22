@@ -1,12 +1,13 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useMemo } from "react";
 import { PokemonContext, PokemonModel } from "../../interfaces/pokemons";
 import { PokeContext } from "../../PokeContext";
 import { CardList } from "../../components/Card/CardList";
 import { getPokemons } from "../../repository/pokeapi";
 import { Search } from "../../components/Search";
+import { Filter } from "../../components/Filter";
 
 export const Pokemons = () => {
-  const { pokemonList, setLoading, setPokemonList, setError } = useContext(
+  const { filter, pokemonList, setLoading, setPokemonList, setError, search } = useContext(
     PokeContext
   ) as PokemonContext;
 
@@ -19,10 +20,19 @@ export const Pokemons = () => {
       .catch((err) => setError(err));
   }, []);
 
+  const filteredPokemon = useMemo(() => {
+    const searchPokemon = pokemonList.filter((pokemon) => pokemon.name.includes(search.toLowerCase()))
+    if(filter) {
+      return searchPokemon.filter(pokemon => pokemon.name)
+    }
+    return searchPokemon
+  }, [search])
+
   return (
     <>
       <Search />
-      <CardList pokemons={pokemonList} />
+      <Filter />
+      <CardList pokemons={filteredPokemon} />
     </>
   );
 };
