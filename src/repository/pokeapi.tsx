@@ -27,7 +27,7 @@ export async function allTypes(): Promise<PokemonModel> {
   return response.json();
 }
 
-export async function pokemonType(name: string): Promise<TypesPokemon> {
-  const response = await fetch(`${API_HOST}/type/${name}`);
+export async function pokemonType(id: string): Promise<TypesPokemon> {
+  const response = await fetch(`${API_HOST}/type/${id}`);
   return response.json();
 }

@@ -7,9 +7,15 @@ import { Search } from "../../components/Search";
 import { Filter } from "../../components/Filter";
 
 export const Pokemons = () => {
-  const { filter, pokemonList, setLoading, setPokemonList, setError, search } = useContext(
-    PokeContext
-  ) as PokemonContext;
+  const {
+    filter,
+    pokemonList,
+    loading,
+    setLoading,
+    setPokemonList,
+    setError,
+    search,
+  } = useContext(PokeContext) as PokemonContext;
 
   useEffect(() => {
     getPokemons()
@@ -17,16 +23,21 @@ export const Pokemons = () => {
         setPokemonList(data.results);
         setLoading(false);
       })
-      .catch((err) => setError(err));
+      .catch(setError);
   }, []);
 
   const filteredPokemon = useMemo(() => {
-    const searchPokemon = pokemonList.filter((pokemon) => pokemon.name.includes(search.toLowerCase()))
-    if(filter) {
-      return searchPokemon.filter(pokemon => pokemon.name)
+    const searchPokemon = pokemonList.filter((pokemon) =>
+      pokemon.name.toLowerCase().includes(search.toLowerCase())
+    );
+    if (filter) {
+      return searchPokemon.filter((pokemon) => pokemon.url);
     }
-    return searchPokemon
-  }, [search])
+    return searchPokemon;
+  }, [filter, pokemonList, search]);
+
+
+  if (loading) <section>Loading...</section>;
 
   return (
     <>

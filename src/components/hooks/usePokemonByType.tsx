@@ -4,18 +4,18 @@ import { PokeContext } from "../../PokeContext";
 import { pokemonType } from "../../repository/pokeapi";
 
 interface Props {
-  name: string;
+  id: string;
 }
 
-export const useFilterType = ({ name }: Props) => {
+export const usePokemonByType = ({ id }: Props) => {
   const { filter } = useContext(PokeContext) as PokemonContext;
-  const [type, setType] = useState<Pokemon[]>([]);
+  const [pokemonByType, setType] = useState<Pokemon[]>([]);
 
   useEffect(() => {
-    pokemonType(name).then((data) => {
+    pokemonType(id).then((data) => {
       setType(data.pokemon);
     });
   }, [filter]);
 
-  return { type };
+  return { pokemonByType };
 };
